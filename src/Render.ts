@@ -113,3 +113,51 @@ export class AceAttorneyTextBox {
     }
 
 }
+
+
+//Produces a rainbow rgb rectangle.
+//Change incremental values in drawFrames() method to change how many colours are rendered.
+//More incrementations = more colours and more render time.
+export class FlashingRects {
+
+    private canvas: any;
+    private ctx: any;
+    private encoder: GIFEncoder;
+
+    constructor(
+        private readonly x: number,
+        private readonly y: number
+    ) { 
+        this.canvas = createCanvas(x, y);
+        this.ctx = this.canvas.getContext('2d');
+        this.encoder = new GIFEncoder(x, y);
+
+        this.startEncoder();
+        this.drawFrames();
+        this.endEncoder();
+    }
+
+    private startEncoder() {
+        this.encoder.createReadStream().pipe(fs.createWriteStream('out/rgb.gif'));
+        this.encoder.start();
+        this.encoder.setRepeat(0);   //0 for repeat, -1 for no-repeat.
+        this.encoder.setDelay(1);  //Frame delay in ms.
+        this.encoder.setQuality(1); //Image quality.
+    }
+
+    private drawFrames() {
+        for ( let red=0; red<256; red = red + 50 ) {
+            for ( let green=0; green<256; green = green + 50 ){
+                for ( let blue=0; blue<256; blue = blue + 50 ) {
+                    this.ctx.fillStyle = `rgb(${red}, ${green}, ${blue})`;
+                    this.ctx.fillRect(0, 0, this.x, this.y);
+                    this.encoder.addFrame(this.ctx);
+                }
+            }
+        }
+    }
+
+    private endEncoder() {
+        this.encoder.finish();
+    }
+}

@@ -1,7 +1,4 @@
-import { AceAttorneyImage, AceAttorneyTextBox } from './Render';
+import { AceAttorneyImage, AceAttorneyTextBox, FlashingRects } from './Render';
 
 
-var b = new AceAttorneyImage('Hello');
-//b.drawBackground(`white`);
-b.loadImage();
-b.save('pic');
+var b = new FlashingRects(100,100);
