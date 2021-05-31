@@ -76,10 +76,13 @@ export class RenderGIF {
         this.ctx.fillRect(0, 0, this.width, this.height);
     }
 
+    public setWriteStyle(fillStyle: string, font: string, textAlign: string) {
+        this.ctx.fillStyle = fillStyle;
+        this.ctx.font = font;
+        this.ctx.textAlign = textAlign;
+    }
+
     public writeText(text: string, x: number, y: number) {
-        this.ctx.fillStyle = "#000";
-        this.ctx.font = "72px Arial";
-        this.ctx.textAlign = "center";
         this.ctx.fillText(text, x, y);
     }
 
