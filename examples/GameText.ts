@@ -7,6 +7,7 @@ const a = async () => {
         1000,  //Outut width
         750    //Output height
     );
+    //x: 1000, y: 750 is optimal for the text box in assets/text-box.png 
 
 
     b.encoderOptions(50, false);    //Set encoder options.
