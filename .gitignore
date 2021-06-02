@@ -1,4 +1,5 @@
 /node_modules/
 /dist/
-/assets/*.png
-/assets/*.jpg
+
+*.jpg
+*.png
