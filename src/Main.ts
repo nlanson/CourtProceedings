@@ -1,27 +1,16 @@
-import { ScrollingTextOnImage } from './Render';
+import { CourtRoom } from './Render';
 
 const a = async () => {
-    var b = new ScrollingTextOnImage(
-        1000,  //Outut width
-        750    //Output height
-    );
-    //x: 1000, y: 750 is optimal for the text box in assets/text-box.png 
+    var b = new CourtRoom();
 
-
-    b.encoderOptions(50, false);    //Set encoder options.
-    b.startEncoder('hello-world');  //Start encoder and set output name. (Required)
-    b.fillBackground('white');      //Fill image background with white. (Optional)
-    b.setWriteStyle('#fff', '32px Arial', 'center'); //Set text style. (For best output)
-
-    await b.loadImage('text-box.png', -10, 0);   //Load image onto canvas. (Can also be used to load a background image)
-    b.addScrollingText('Hello World!', 10, 575); //Add scrolling text ontop of image.
-
-
-    b.finishEncoding();  //Finish encoding.
+    await b.litigate('Listen here you little shit.');
 }
 
 
 a();
+
+//Next steps would be to get 0th frame items rendered using a "before" function
+//aswell as a class for generating court room gifs from JSON.
 
 
 

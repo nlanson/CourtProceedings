@@ -7,7 +7,7 @@ var b = new SimpleScrollingText(1200, 620);
 
 //Set encoder params
 b.encoderOptions(50, false);                       //Set encoder options.
-b.startEncoder('hello');                           //Start encoder and set file outputname.
+b.startEncoder('hello-world');                           //Start encoder and set file outputname.
 
 //Output settings
 b.fillBackground('yellow');                       //Set gif background colour.

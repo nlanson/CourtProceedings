@@ -1,6 +1,6 @@
 import { GIFRenderer, Renderer, LoadImage } from './BaseRendererClasses';
 
-import { createCanvas, Image, loadImage } from 'canvas';
+import { createCanvas, loadImage } from 'canvas';
 import GIFEncoder from 'gifencoder';
 import * as fs from 'fs';
 
@@ -61,11 +61,11 @@ export class SimpleScrollingText extends GIFRenderer{
         this.ctx.textAlign = textAlign;
     }
 
-    public writeText(text: string, x: number, y: number) {
+    private writeText(text: string, x: number, y: number) {
         this.ctx.fillText(text, x, y);
     }
 
-    public measureText(text: string): number {
+    private measureText(text: string): number {
         return this.ctx.measureText(text).width;
     }
 
@@ -81,6 +81,8 @@ export class SimpleScrollingText extends GIFRenderer{
 }
 
 
+//To create a simple scrolling text ontop of an image.
+//See examples/GameText.ts for usage
 export class ScrollingTextOnImage extends SimpleScrollingText implements LoadImage {
     
     constructor(
@@ -95,4 +97,33 @@ export class ScrollingTextOnImage extends SimpleScrollingText implements LoadIma
     }
 
 
+}
+
+
+//This court room class only has ONE possible background option and no character options setup yet.
+//This should, take in a custom type param that will dictate how the gif renders.
+//NOT FINAL
+export class CourtRoom extends SimpleScrollingText implements LoadImage {
+    
+    constructor() {
+        super(1000, 720);
+        
+    }
+
+    public async litigate(text: string): Promise<void> {
+        this.encoderOptions(50, false);
+        this.setWriteStyle('#fff', '32px Arial', 'center');
+        this.startEncoder('court-room');
+        await this.loadImage('../assets/bg_court_defence.jpg', 0, 0);
+        await this.loadImage('../assets/text-box.png', -10, 0);
+        this.addScrollingText(text, 10, 575);
+        this.finishEncoding();
+    }
+
+    async loadImage(image: string, x: number, y: number): Promise<void> {
+        let img: any = await loadImage(`assets/${image}`);
+        this.ctx.drawImage(img, x, y);
+    }
+        
+    
 }

@@ -11,7 +11,7 @@ const a = async () => {
 
 
     b.encoderOptions(50, false);    //Set encoder options.
-    b.startEncoder('hello-world');  //Start encoder and set output name. (Required)
+    b.startEncoder('game-text');  //Start encoder and set output name. (Required)
     b.fillBackground('white');      //Fill image background with white. (Optional)
     b.setWriteStyle('#fff', '32px Arial', 'center'); //Set text style. (For best output)
 
