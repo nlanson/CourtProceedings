@@ -1,16 +1,21 @@
-import { CourtRoom } from './Render';
+import { CourtScene, CourtSceneData } from './Court';
 
 const a = async () => {
-    var b = new CourtRoom();
+    var b = new CourtScene({
+        character: 'pheonix',
+        background: 'defence',
+        dialog: "'The quick brown fox jumps over the lazy dog' contains all letters of the alphabet. ",
+        action: "normal_talking"
+    });
 
-    await b.litigate('Listen here you little shit.');
+    await b.litigate('test');
 }
 
 
 a();
 
 //Next steps would be to get 0th frame items rendered using a "before" function
-//aswell as a class for generating court room gifs from JSON.
+//Fix normal talking gif
 
 
 
