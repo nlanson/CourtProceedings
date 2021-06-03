@@ -6,4 +6,4 @@ Example:
 
 Chain these and you have yourself a whole court session.
 
-Assets are not saved to the git repo.
+Assets are not saved to the git repo. Open an issue or contact the repo owner for access.
