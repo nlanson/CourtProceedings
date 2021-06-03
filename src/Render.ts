@@ -1,27 +1,16 @@
-import { GIFRenderer, Renderer, LoadImage } from './BaseRendererClasses';
+import { GIFRenderer, Renderer, LoadImage } from './root_renderers';
 
-import { createCanvas, loadImage } from 'canvas';
-import GIFEncoder from 'gifencoder';
-import * as fs from 'fs';
+import { loadImage } from 'canvas';
 
 
 //Create an image, add background and write text.
-export class SimpleText {
-
-    private canvas: any;
-    private ctx: any;
+export class SimpleText extends Renderer{
     
     constructor(
-        private width: number,
-        private height: number
+        width: number,
+        height: number
     ) {
-        this.canvas = createCanvas(this.width, this.height);
-        this.ctx = this.canvas.getContext('2d');
-    }
-
-    public save(name: string) {
-        const buffer = this.canvas.toBuffer('image/png');
-        fs.writeFileSync(`./out/${name}.png`, buffer);
+        super(width, height)
     }
 
     public fillBackground(colour: string) {
@@ -61,11 +50,11 @@ export class SimpleScrollingText extends GIFRenderer{
         this.ctx.textAlign = textAlign;
     }
 
-    private writeText(text: string, x: number, y: number) {
+    protected writeText(text: string, x: number, y: number) {
         this.ctx.fillText(text, x, y);
     }
 
-    private measureText(text: string): number {
+    protected measureText(text: string): number {
         return this.ctx.measureText(text).width;
     }
 
@@ -97,33 +86,4 @@ export class ScrollingTextOnImage extends SimpleScrollingText implements LoadIma
     }
 
 
-}
-
-
-//This court room class only has ONE possible background option and no character options setup yet.
-//This should, take in a custom type param that will dictate how the gif renders.
-//NOT FINAL
-export class CourtRoom extends SimpleScrollingText implements LoadImage {
-    
-    constructor() {
-        super(1000, 720);
-        
-    }
-
-    public async litigate(text: string): Promise<void> {
-        this.encoderOptions(50, false);
-        this.setWriteStyle('#fff', '32px Arial', 'center');
-        this.startEncoder('court-room');
-        await this.loadImage('../assets/bg_court_defence.jpg', 0, 0);
-        await this.loadImage('../assets/text-box.png', -10, 0);
-        this.addScrollingText(text, 10, 575);
-        this.finishEncoding();
-    }
-
-    async loadImage(image: string, x: number, y: number): Promise<void> {
-        let img: any = await loadImage(`assets/${image}`);
-        this.ctx.drawImage(img, x, y);
-    }
-        
-    
 }

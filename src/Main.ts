@@ -1,16 +1,23 @@
-import { CourtRoom } from './Render';
+import { CourtScene, CourtSceneData } from './Court';
+import { ScrollingTextOnImage } from './Render';
 
 const a = async () => {
-    var b = new CourtRoom();
+    var b = new CourtScene({
+        character: 'pheonix',
+        background: 'prosecution',
+        dialog: "The quick brown fox jumps over the lazy dog ",
+        action: "normal_talking"
+    });
 
-    await b.litigate('Hello Mizuki! What electives are you going to choose?');
+    await b.litigate('test');
 }
 
 
 a();
 
+
 //Next steps would be to get 0th frame items rendered using a "before" function
-//aswell as a class for generating court room gifs from JSON.
+//Setup character sprites. (See http://www.court-records.net/sprites1.htm)
 
 
 
