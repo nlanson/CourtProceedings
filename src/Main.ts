@@ -1,5 +1,5 @@
 import { CourtScene, CourtSceneData } from './Court';
-import { ScrollingTextOnImage } from './Render';
+import { ScrollingTextOnImage } from './Renderers/ScrollingTextOnImage';
 
 const a = async () => {
     var b = new CourtScene({

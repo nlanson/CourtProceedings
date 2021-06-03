@@ -1,8 +1,8 @@
 import { loadImage } from 'canvas';
 import * as fs from 'fs/promises';
 
-import { SimpleScrollingText } from './Render';
-import { LoadImage } from './root_renderers';
+import { SimpleScrollingText } from './Renderers/SimpleScrollingText';
+import { LoadImage } from './Renderers/Renderer';
 
 export type Character = 'pheonix' | 'edgeworth';
 export type Background = 'defence' | 'judge' | 'prosecution';

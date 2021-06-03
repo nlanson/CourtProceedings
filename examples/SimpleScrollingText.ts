@@ -1,7 +1,7 @@
 //This example will render scrolling text on a static background
 //and output a gif.
 
-import { SimpleScrollingText } from '../src/Render';
+import { SimpleScrollingText } from './Renderers/SimpleScrollingText';
 
 var b = new SimpleScrollingText(1200, 620);
 

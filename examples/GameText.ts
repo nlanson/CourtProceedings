@@ -1,6 +1,6 @@
 //This example generates a GIF with text scrolling ontop of an image.
 
-import { ScrollingTextOnImage } from '../src/Render';
+import { ScrollingTextOnImage } from './Renderers/ScrollingTextOnImage';
 
 const a = async () => {
     var b = new ScrollingTextOnImage(
