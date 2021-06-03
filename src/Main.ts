@@ -3,7 +3,7 @@ import { CourtRoom } from './Render';
 const a = async () => {
     var b = new CourtRoom();
 
-    await b.litigate('Listen here you little shit.');
+    await b.litigate('Hello Mizuki! What electives are you going to choose?');
 }
 
 
