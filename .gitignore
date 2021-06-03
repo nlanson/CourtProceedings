@@ -4,3 +4,10 @@
 .DS_Store
 
 *.gif
+*.png
+
+!assets/bg_defence.png
+!assets/bg_judge.png
+!assets/bg_prosecution.png
+!assets/text-box2.png
+!out/test.gif

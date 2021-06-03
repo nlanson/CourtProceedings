@@ -1,18 +1,22 @@
+//Internal
+import { SimpleScrollingText } from './Renderers/SimpleScrollingText';
+import { LoadImage } from './Renderers/Renderer';
+import { PheonixActionsList, PheonixActionsDictionary, ActionTracker } from './Actions';
+
+
+//External
 import { loadImage } from 'canvas';
 import * as fs from 'fs/promises';
 
-import { SimpleScrollingText } from './Renderers/SimpleScrollingText';
-import { LoadImage } from './Renderers/Renderer';
-
 export type Character = 'pheonix' | 'edgeworth';
 export type Background = 'defence' | 'judge' | 'prosecution';
-//Might need an Action type later on.
+
 
 export type CourtSceneData = {
     character: Character,
     background: Background,
     dialog: string,
-    action: string
+    action: PheonixActionsList 
 }
 
 //This court room class only has ONE possible background option and no character options setup yet.
@@ -20,20 +24,27 @@ export type CourtSceneData = {
 //NOT FINAL
 export class CourtScene extends SimpleScrollingText implements LoadImage {
     
+    private action: ActionTracker;
+    
     constructor(
         private scene: CourtSceneData
     ) {
         super(960, 640);
+
+        //Validate action here. Make sure selected character has selection action available.
+        this.action = PheonixActionsDictionary[this.scene.action];
     }
 
     public async litigate(save: string): Promise<void> {
         await this.setup(save);
+        await this.preDialogueAnimation();
         await this.addScrollingText(this.scene.dialog, 10, 520);
+        await this.postDialogueAnimation();
         this.finishEncoding();
     }
 
     private async setup(save: string) {
-        this.encoderOptions(50, false);
+        this.encoderOptions(50);
         this.setWriteStyle('#fff', '24px Arial', 'center');
         this.startEncoder(save);
         await this.loadBackground();
@@ -54,8 +65,24 @@ export class CourtScene extends SimpleScrollingText implements LoadImage {
             default:
                 await this.loadImage('bg_defence.png', 0, 0);
         }
+    }
 
+    private async loadTextBox() {
         await this.loadImage('text-box2.png', 0, 440);
+    }
+
+    private async preDialogueAnimation() {
+        if ( this.action.pre != null ) {
+            //this.action.pre[1] is where the frame count of the pre-dialog action is stored.
+            for ( let i=0; i<this.action.pre[1]; i++ ) {
+                // Index 0 stores the directory of the frames
+                await this.loadImage(`${this.action.pre[0]}/${i}.png`, 0, 0);
+                this.setFrame();
+            }
+        } else {
+            console.log('no pre-dialog frames to render.')
+            return
+        }
     }
 
     async addScrollingText(text: string, xCoord: number, yCoord:number) {
@@ -63,17 +90,51 @@ export class CourtScene extends SimpleScrollingText implements LoadImage {
         var k: number = 0;
 
         for ( let i=0; i<text.length; i++ ) {
-            this.writeText(text[i], xCoord+prevWidth+(this.measureText(text[i])/2), yCoord); //xCoord+prevWidth+(b.measureText(text[i])/2) gives the x coord to place the next letter.
-            prevWidth += this.measureText(text[i]); //Add the current letter to the compounded width.
+            //Redraw background layer.
+            await this.loadBackground();
+            
+            //If dialog animation loop is over reset to 0.
+            //Then, draw dialog animation frame k and then increment k
+            if ( k > this.action.dialog[1] )    
+                k = 0;
+            await this.loadImage(`${this.action.dialog[0]}/${k}.png`, 0,0);
+            k++;
+
+            //Draw the text box again
+            await this.loadTextBox();
+
+            //And add the scrolling text
+            //idk why but the letters shake around without the Math.floor().
+            this.writeText(text.slice(0, i), Math.floor(xCoord+(this.measureText(text.slice(0, i))/2)), yCoord); //Render the next letter
+            
 
             //Todo:
-            //1. Split sprite GIFs into individual frame PNGs.
-            //   Sprite GIFs are ignored by git as they take up lots of space. Should upload to some file storage for access.
-            //2. Create a function that adds the character sprite into the context based on talking status, idle status or motion status.
-            //   Use the this.scene.action property to determine what animations to use.
-            //   Make a dictionary for the different characters and their animations to create instructions on which animation to loop(talking), any pre animations(motions such as pointing) and post animations(static standing).
+            //Move long text onto the next row.
 
             this.setFrame(); //Set frame.
+        }
+    }
+
+    private async postDialogueAnimation() {
+        this.encoderOptions(130); //Set slower time delay for post dialog animation.
+        
+        if ( this.action.post != null ) {
+            for ( let i=0; i<2; i++ ) {
+                //this.action.post[1] is where the frame count of the pre-dialog action is stored.
+                for ( let i=0; i<this.action.post[1]; i++ ) {
+                    await this.loadBackground();
+                    // Index 0 stores the directory of the frames
+                    await this.loadImage(`${this.action.post[0]}/${i}.png`, 0, 0);
+                    await this.loadTextBox();
+                    this.writeText(this.scene.dialog, 10+(this.measureText(this.scene.dialog)/2), 520);
+                    
+
+                    this.setFrame();
+                }
+            } 
+        } else {
+            console.log('no post-dialog frames to render.')
+            return
         }
     }
 

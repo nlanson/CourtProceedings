@@ -1,32 +1,97 @@
 const SD = 'assets/sprites';
-export type PheonixActionsList = 
-'normal'
-| 'confident'
-| 'cornered'
-| 'damage'
-| 'breakdown'
-| 'headshake'
-| 'nod'
-| 'point'
-| 'read'
-| 'silly'
-| 'sip'
-| 'slam'
-| 'thinking'
+export enum PheonixActionsList {
+    NORMAL,
+    CONFIDENT,
+    CORNERED,
+    DAMAGE,
+    BREAKDOWN,
+    HEADSHAKE,
+    NOD,
+    POINT,
+    READ,
+    SILLY,
+    SIP,
+    SLAM,
+    THINKING
+}
 
-//Record of Pheonix Actions and directory to find their assets.
-export const pheonixActions: Record<PheonixActionsList, Array<string>> = {
-    normal: [`${SD}/pheonix/normal/normal_talking`, `${SD}/pheonix/normal/normal_stand`],
-    confident: [`${SD}/pheonix/confident/confident_talking`, `${SD}/pheonix/confident/confident_stand`],
-    cornered: [`${SD}/pheonix/cornered/cornered_talking`, `${SD}/pheonix/cornered/cornered_stand`],
-    damage: [`${SD}/pheonix/damage/damage`, `${SD}/pheonix/damage/cornered_talking`, `${SD}/pheonix/damage/cornered_stand`],
-    breakdown: [`${SD}/pheonix/breakdown/breakdown`],
-    headshake: [`${SD}/pheonix/headshake/headshake`, `${SD}/pheonix/headshake/normal_talking`, `${SD}/pheonix/headshake/normal_stand`],
-    nod: [`${SD}/pheonix/nod/nod`, `${SD}/pheonix/nod/normal_talking`, `${SD}/pheonix/nod/normal_stand`],
-    point: [`${SD}/pheonix/point/point_motion`, `${SD}/pheonix/point/point_talking`, `${SD}/pheonix/point/point_stand`],
-    read: [`${SD}/pheonix/read/read_talking`, `${SD}/pheonix/read/read_standing`],
-    silly: [`${SD}/pheonix/silly/silly_talking`, `${SD}/pheonix/silly/silly_stand`],
-    sip: [`${SD}/pheonix/sip/sip_stand`, `${SD}/pheonix/sip/sip_motion`, `${SD}/pheonix/sip/sip_talking`, `${SD}/pheonix/sip/sip_stand`],
-    slam: [`${SD}/pheonix/slam/slam_talking`, `${SD}/pheonix/slam/slam_stand`],
-    thinking: [`${SD}/pheonix/thinking/thinking_talking`, `${SD}/pheonix/thinking/thinking_stand`]
+//Tuple stores the action frames and frame count.
+//Unnecessary for dialog since it will be looping.
+type ActionInfo = [string, number];
+
+export type ActionTracker = {
+    pre: ActionInfo | null,
+    dialog: ActionInfo,
+    post: ActionInfo | null
+}
+
+//Dictionary to store all the actions Pheonix can take based on the ActionList Enum above.
+//Store the action frames location and frame count for pre and post.
+//ONLY STORES CORRECT DATA FOR NORMAL ACTION AT THE MOMENT FOR TESTING
+export const PheonixActionsDictionary:Record<PheonixActionsList, ActionTracker> = {
+    [PheonixActionsList.NORMAL]: {
+        pre: null,
+        dialog: ['sprites/pheonix/normal/normal_talking/', 21],
+        post: ['sprites/pheonix/normal/normal_stand/', 8] //Need to edit to add more time between blinks
+    },
+    [PheonixActionsList.CONFIDENT]: {
+        pre: null,
+        dialog: ['confident_talking', 0],
+        post: ['confident_stand', 0]
+    },
+    [PheonixActionsList.CORNERED]: {
+        pre: null,
+        dialog: ['cornered_talking', 0],
+        post: ['cornered_stand', 0]
+    },
+    [PheonixActionsList.DAMAGE]: {
+        pre: ['damage', 0],
+        dialog: ['cornered_talking', 0],
+        post: ['cornered_stand', 0]
+    },
+    [PheonixActionsList.BREAKDOWN]: {
+        pre: null,
+        dialog: ['breakdown', 0],
+        post: null
+    },
+    [PheonixActionsList.HEADSHAKE]: {
+        pre: ['headshake', 0],
+        dialog: ['normal_talking', 0],
+        post: ['normal_stand', 0]
+    },
+    [PheonixActionsList.NOD]: {
+        pre: ['nod', 0],
+        dialog: ['normal_talking', 0],
+        post: ['normal_stand',0]
+    },
+    [PheonixActionsList.POINT]: {
+        pre: ['point_motion', 0],
+        dialog: ['point_talking', 0],
+        post: ['point_stand', 0]
+    },
+    [PheonixActionsList.READ]: {
+        pre: null,
+        dialog: ['read_talking', 0],
+        post: ['read_stand', 0]
+    },
+    [PheonixActionsList.SILLY]: {
+        pre: null,
+        dialog: ['silly_talking', 0],
+        post: ['silly_stand', 0]
+    },
+    [PheonixActionsList.SIP]: {
+        pre: ['sip_motion', 0],
+        dialog: ['sip_talking', 0],
+        post: ['sip_stand', 0]
+    },
+    [PheonixActionsList.SLAM]: {
+        pre: null,
+        dialog: ['slam_talking', 0],
+        post: ['slam_stand', 0]
+    },
+    [PheonixActionsList.THINKING]: {
+        pre: null,
+        dialog: ['thinking_talking', 0],
+        post: ['thinking_stand', 0]
+    }
 }
