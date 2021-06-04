@@ -9,8 +9,8 @@ const a = async () => {
     var b = new CourtScene({
         character: 'pheonix',
         background: 'defence',
-        dialog: "test test test test test",
-        action: PheonixActionsList.THINKING
+        dialog: "The quick brown fox jumps over the lazy dog",
+        action: PheonixActionsList.SILLY
     });
 
     await b.litigate('test');
