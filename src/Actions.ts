@@ -16,7 +16,6 @@ export enum PheonixActionsList {
 }
 
 //Tuple stores the action frames and frame count.
-//Unnecessary for dialog since it will be looping.
 type ActionInfo = [string, number];
 
 export type ActionTracker = {
@@ -27,7 +26,7 @@ export type ActionTracker = {
 
 //Dictionary to store all the actions Pheonix can take based on the ActionList Enum above.
 //Store the action frames location and frame count for pre and post.
-//ONLY STORES CORRECT DATA FOR NORMAL ACTION AT THE MOMENT FOR TESTING
+//The ones that need fixing have frames written on top of each other for some reason.
 export const PheonixActionsDictionary:Record<PheonixActionsList, ActionTracker> = {
     [PheonixActionsList.NORMAL]: {
         pre: null,
@@ -36,62 +35,62 @@ export const PheonixActionsDictionary:Record<PheonixActionsList, ActionTracker> 
     },
     [PheonixActionsList.CONFIDENT]: {
         pre: null,
-        dialog: ['confident_talking', 0],
-        post: ['confident_stand', 0]
+        dialog: ['sprites/pheonix/confident/confident_talking/', 20],
+        post: ['sprites/pheonix/confident/confident_stand/', 0]
     },
     [PheonixActionsList.CORNERED]: {
         pre: null,
-        dialog: ['cornered_talking', 0],
-        post: ['cornered_stand', 0]
+        dialog: ['sprites/pheonix/cornered/cornered_talking', 19], //Need to fix
+        post: ['sprites/pheonix/cornered/cornered_stand', 19] //Need to fix
     },
     [PheonixActionsList.DAMAGE]: {
-        pre: ['damage', 0],
-        dialog: ['cornered_talking', 0],
-        post: ['cornered_stand', 0]
+        pre: ['sprites/pheonix/damage/damage', 8], //Need to fix
+        dialog: ['sprites/pheonix/cornered/cornered_talking', 19],
+        post: ['sprites/pheonix/cornered/cornered_stand', 19]
     },
     [PheonixActionsList.BREAKDOWN]: {
         pre: null,
-        dialog: ['breakdown', 0],
+        dialog: ['sprites/pheonix/breakdown/', 0],
         post: null
     },
     [PheonixActionsList.HEADSHAKE]: {
-        pre: ['headshake', 0],
-        dialog: ['normal_talking', 0],
-        post: ['normal_stand', 0]
+        pre: ['sprites/pheonix/headshake/headshake/', 9], //Need to fix
+        dialog: ['sprites/pheonix/normal/normal_talking/', 21],
+        post: ['sprites/pheonix/normal/normal_stand/', 8]
     },
     [PheonixActionsList.NOD]: {
-        pre: ['nod', 0],
-        dialog: ['normal_talking', 0],
-        post: ['normal_stand',0]
+        pre: ['sprites/pheonix/nod/nod/', 4],
+        dialog: ['sprites/pheonix/normal/normal_talking/', 21], //Need to fix
+        post: ['sprites/pheonix/normal/normal_stand/', 8]
     },
     [PheonixActionsList.POINT]: {
-        pre: ['point_motion', 0],
-        dialog: ['point_talking', 0],
-        post: ['point_stand', 0]
+        pre: ['sprites/pheonix/point/point_motion/', 6], //Need to fix
+        dialog: ['sprites/pheonix/point/point_talking/', 17],
+        post: ['sprites/pheonix/point/point_stand/', 0]
     },
     [PheonixActionsList.READ]: {
         pre: null,
-        dialog: ['read_talking', 0],
-        post: ['read_stand', 0]
+        dialog: ['sprites/pheonix/read/read_talking/', 19], //Need to fix
+        post: ['sprites/pheonix/read/read_stand/', 20] //Need to fix
     },
     [PheonixActionsList.SILLY]: {
         pre: null,
-        dialog: ['silly_talking', 0],
-        post: ['silly_stand', 0]
+        dialog: ['sprites/pheonix/silly/silly_talking/', 20],
+        post: ['sprites/pheonix/silly/silly_stand/', 0]
     },
-    [PheonixActionsList.SIP]: {
+    [PheonixActionsList.SIP]: { //NOT YET CONVERTED
         pre: ['sip_motion', 0],
         dialog: ['sip_talking', 0],
         post: ['sip_stand', 0]
     },
     [PheonixActionsList.SLAM]: {
         pre: null,
-        dialog: ['slam_talking', 0],
-        post: ['slam_stand', 0]
+        dialog: ['sprites/pheonix/slam/slam_talking/', 21],
+        post: ['sprites/pheonix/slam/slam_stand/', 8]
     },
     [PheonixActionsList.THINKING]: {
         pre: null,
-        dialog: ['thinking_talking', 0],
-        post: ['thinking_stand', 0]
+        dialog: ['sprites/pheonix/thinking/thinking_talking/', 21],
+        post: ['sprites/pheonix/thinking/thinking_stand/', 26]
     }
 }

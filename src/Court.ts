@@ -19,6 +19,7 @@ export type CourtSceneData = {
     action: PheonixActionsList 
 }
 
+
 //This court room class only has ONE possible background option and no character options setup yet.
 //This should, take in a custom type param that will dictate how the gif renders.
 //NOT FINAL
@@ -65,6 +66,7 @@ export class CourtScene extends SimpleScrollingText implements LoadImage {
             default:
                 await this.loadImage('bg_defence.png', 0, 0);
         }
+
     }
 
     private async loadTextBox() {
@@ -72,9 +74,14 @@ export class CourtScene extends SimpleScrollingText implements LoadImage {
     }
 
     private async preDialogueAnimation() {
+        this.encoderOptions(100); //Set slower time delay for predialog animation.
+
         if ( this.action.pre != null ) {
             //this.action.pre[1] is where the frame count of the pre-dialog action is stored.
-            for ( let i=0; i<this.action.pre[1]; i++ ) {
+            for ( let i=0; i<=this.action.pre[1]; i++ ) {
+                //Redraw background each frame to cancel out previous motions
+                await this.loadBackground();
+                
                 // Index 0 stores the directory of the frames
                 await this.loadImage(`${this.action.pre[0]}/${i}.png`, 0, 0);
                 this.setFrame();
@@ -86,19 +93,21 @@ export class CourtScene extends SimpleScrollingText implements LoadImage {
     }
 
     async addScrollingText(text: string, xCoord: number, yCoord:number) {
+        this.encoderOptions(50);
+        
         var prevWidth: number = 0; //Variable to track total width of text. Used for frame setting.
-        var k: number = 0;
+        var frameCount: number = 0;
 
-        for ( let i=0; i<text.length; i++ ) {
+        for ( let i=0; i<=text.length; i++ ) {
             //Redraw background layer.
             await this.loadBackground();
             
             //If dialog animation loop is over reset to 0.
-            //Then, draw dialog animation frame k and then increment k
-            if ( k > this.action.dialog[1] )    
-                k = 0;
-            await this.loadImage(`${this.action.dialog[0]}/${k}.png`, 0,0);
-            k++;
+            //Then, draw dialog animation frame and then increment the frameCount
+            if ( frameCount > this.action.dialog[1] )    
+                frameCount = 1;
+            await this.loadImage(`${this.action.dialog[0]}/${frameCount}.png`, 0,0);
+            frameCount++;
 
             //Draw the text box again
             await this.loadTextBox();
@@ -116,24 +125,19 @@ export class CourtScene extends SimpleScrollingText implements LoadImage {
     }
 
     private async postDialogueAnimation() {
-        this.encoderOptions(130); //Set slower time delay for post dialog animation.
+        this.encoderOptions(100); //Set slower time delay for post dialog animation.
         
         if ( this.action.post != null ) {
-            for ( let i=0; i<2; i++ ) {
-                //this.action.post[1] is where the frame count of the pre-dialog action is stored.
-                for ( let i=0; i<this.action.post[1]; i++ ) {
+                for ( let i=0; i<=this.action.post[1]; i++ ) {
                     await this.loadBackground();
-                    // Index 0 stores the directory of the frames
                     await this.loadImage(`${this.action.post[0]}/${i}.png`, 0, 0);
                     await this.loadTextBox();
                     this.writeText(this.scene.dialog, 10+(this.measureText(this.scene.dialog)/2), 520);
                     
-
                     this.setFrame();
                 }
-            } 
         } else {
-            console.log('no post-dialog frames to render.')
+            console.log('no post-dialog frames to render.');
             return
         }
     }

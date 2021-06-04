@@ -9,8 +9,8 @@ const a = async () => {
     var b = new CourtScene({
         character: 'pheonix',
         background: 'defence',
-        dialog: "Elon musk needs to stay the fuck out of crypto.",
-        action: PheonixActionsList.NORMAL
+        dialog: "test test test test test",
+        action: PheonixActionsList.THINKING
     });
 
     await b.litigate('test');
@@ -23,18 +23,21 @@ a();
 
 
 //Use this function to convert sprite gif to png frames.
+//Only SIP action not converted
 const convert = async () => {
-    const dir: string  = `assets/sprites/pheonix/normal/normal_talking.gif`;
+    const gifdir: string  = `assets/sprites/pheonix/thinking/thinking_talking.gif`;
+    const savedir: string = `assets/sprites/pheonix/thinking/thinking_talking/`
+    await fs.mkdirSync(savedir);
     
     gifFrames(
-        { url:  dir, frames: 'all', outputType: 'png', cumulative: true },
+        { url:  gifdir, frames: 'all', outputType: 'png', cumulative: true },
         function (err:any, frameData:any) {
           if (err) {
             throw err;
           }
           frameData.forEach(function (frame:any) {
             frame.getImage().pipe(fs.createWriteStream(
-              'assets/sprites/pheonix/normal/normal_talking/' + frame.frameIndex + '.png'
+              savedir + frame.frameIndex + '.png'
             ));
           });
         }
