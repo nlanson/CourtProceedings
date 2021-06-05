@@ -1,5 +1,4 @@
-import { CourtScene, CourtSceneData } from './Court';
-import { ScrollingTextOnImage } from './Renderers/ScrollingTextOnImage';
+import { CourtScene } from './Court';
 import { PheonixActionsList } from './Actions';
 
 import * as fs from 'fs';
@@ -9,8 +8,8 @@ const a = async () => {
     var b = new CourtScene({
         character: 'pheonix',
         background: 'defence',
-        dialog: "The quick brown fox jumps over the lazy dog",
-        action: PheonixActionsList.SILLY
+        dialog: "Yes, I made this library out of bordom.",
+        action: PheonixActionsList.NOD
     });
 
     await b.litigate('test');
@@ -25,23 +24,22 @@ a();
 //Use this function to convert sprite gif to png frames.
 //Only SIP action not converted
 const convert = async () => {
-    const gifdir: string  = `assets/sprites/pheonix/thinking/thinking_talking.gif`;
-    const savedir: string = `assets/sprites/pheonix/thinking/thinking_talking/`
-    await fs.mkdirSync(savedir);
+    const gifdir: string  = `assets/sprites/pheonix/read/read_talking.gif`;
+    const savedir: string = `assets/sprites/pheonix/read/read_talking2/`
+    fs.mkdirSync(savedir);
     
-    gifFrames(
-        { url:  gifdir, frames: 'all', outputType: 'png', cumulative: true },
-        function (err:any, frameData:any) {
-          if (err) {
-            throw err;
-          }
-          frameData.forEach(function (frame:any) {
-            frame.getImage().pipe(fs.createWriteStream(
-              savedir + frame.frameIndex + '.png'
-            ));
-          });
-        }
-      );
+    gifFrames({ url: gifdir, frames: 'all', outputType: 'png', cumulative: false })
+    .then(function (frameData: any, err: any) {
+      if (err) {
+        throw err;
+      }
+
+      frameData.forEach(async function (frame: any) {
+        frame.getImage().pipe(fs.createWriteStream(
+          savedir + frame.frameIndex + '.png'
+        ));
+      });
+    });
 
 }
 

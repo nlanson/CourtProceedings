@@ -105,9 +105,16 @@ export class CourtScene extends SimpleScrollingText implements LoadImage {
             //If dialog animation loop is over reset to 0.
             //Then, draw dialog animation frame and then increment the frameCount
             if ( frameCount > this.action.dialog[1] )    
-                frameCount = 1;
+                frameCount = 0;
+            
+
+            //Draw the sprite
             await this.loadImage(`${this.action.dialog[0]}/${frameCount}.png`, 0,0);
-            frameCount++;
+
+            //Only increase the frame count every two letters. 
+            //This is done to keep the sprite animation speed the same as the post and pre dialog animations whilst keeping the text speed fast.
+            if ( i % 2 == 0 )
+                frameCount++;
 
             //Draw the text box again
             await this.loadTextBox();

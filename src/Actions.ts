@@ -40,13 +40,13 @@ export const PheonixActionsDictionary:Record<PheonixActionsList, ActionTracker> 
     },
     [PheonixActionsList.CORNERED]: {
         pre: null,
-        dialog: ['sprites/pheonix/cornered/cornered_talking', 19], //Need to fix
-        post: ['sprites/pheonix/cornered/cornered_stand', 19] //Need to fix
+        dialog: ['sprites/pheonix/cornered/cornered_talking2/', 19],
+        post: ['sprites/pheonix/cornered/cornered_stand2/', 19]
     },
     [PheonixActionsList.DAMAGE]: {
-        pre: ['sprites/pheonix/damage/damage', 8], //Need to fix
-        dialog: ['sprites/pheonix/cornered/cornered_talking', 19],
-        post: ['sprites/pheonix/cornered/cornered_stand', 19]
+        pre: ['sprites/pheonix/damage/damage2/', 13],
+        dialog: ['sprites/pheonix/cornered/cornered_talking2/', 19],
+        post: ['sprites/pheonix/cornered/cornered_stand2/', 19]
     },
     [PheonixActionsList.BREAKDOWN]: {
         pre: null,
@@ -54,24 +54,24 @@ export const PheonixActionsDictionary:Record<PheonixActionsList, ActionTracker> 
         post: null
     },
     [PheonixActionsList.HEADSHAKE]: {
-        pre: ['sprites/pheonix/headshake/headshake/', 9], //Need to fix
+        pre: ['sprites/pheonix/headshake/headshake2/', 9],
         dialog: ['sprites/pheonix/normal/normal_talking/', 21],
         post: ['sprites/pheonix/normal/normal_stand/', 8]
     },
     [PheonixActionsList.NOD]: {
-        pre: ['sprites/pheonix/nod/nod/', 4],
-        dialog: ['sprites/pheonix/normal/normal_talking/', 21], //Need to fix
+        pre: ['sprites/pheonix/nod/nod2/', 4],
+        dialog: ['sprites/pheonix/normal/normal_talking/', 21],
         post: ['sprites/pheonix/normal/normal_stand/', 8]
     },
     [PheonixActionsList.POINT]: {
-        pre: ['sprites/pheonix/point/point_motion/', 6], //Need to fix
+        pre: ['sprites/pheonix/point/point_motion2/', 6], //Frame splitter not working
         dialog: ['sprites/pheonix/point/point_talking/', 17],
         post: ['sprites/pheonix/point/point_stand/', 0]
     },
     [PheonixActionsList.READ]: {
         pre: null,
-        dialog: ['sprites/pheonix/read/read_talking/', 19], //Need to fix
-        post: ['sprites/pheonix/read/read_stand/', 20] //Need to fix
+        dialog: ['sprites/pheonix/read/read_talking2/', 19], //Frame splitter not working
+        post: ['sprites/pheonix/read/read_stand2/', 20]
     },
     [PheonixActionsList.SILLY]: {
         pre: null,
