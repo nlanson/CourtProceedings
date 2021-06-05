@@ -8,8 +8,8 @@ const a = async () => {
     var b = new CourtScene({
         character: 'pheonix',
         background: 'defence',
-        dialog: "Yes, I made this library out of bordom.",
-        action: PheonixActionsList.NOD
+        dialog: "Well actually, according to wikipedia, the ocean is a soup.",
+        action: PheonixActionsList.READ
     });
 
     await b.litigate('test');
@@ -24,8 +24,8 @@ a();
 //Use this function to convert sprite gif to png frames.
 //Only SIP action not converted
 const convert = async () => {
-    const gifdir: string  = `assets/sprites/pheonix/read/read_talking.gif`;
-    const savedir: string = `assets/sprites/pheonix/read/read_talking2/`
+    const gifdir: string  = `assets/sprites/pheonix/point/point_motion.gif`;
+    const savedir: string = `assets/sprites/pheonix/point/point_motion2/`
     fs.mkdirSync(savedir);
     
     gifFrames({ url: gifdir, frames: 'all', outputType: 'png', cumulative: false })
@@ -40,7 +40,6 @@ const convert = async () => {
         ));
       });
     });
-
 }
 
 //convert();

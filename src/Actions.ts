@@ -64,13 +64,13 @@ export const PheonixActionsDictionary:Record<PheonixActionsList, ActionTracker> 
         post: ['sprites/pheonix/normal/normal_stand/', 8]
     },
     [PheonixActionsList.POINT]: {
-        pre: ['sprites/pheonix/point/point_motion2/', 6], //Frame splitter not working
+        pre: ['sprites/pheonix/point/point_motion2/', 3],
         dialog: ['sprites/pheonix/point/point_talking/', 17],
         post: ['sprites/pheonix/point/point_stand/', 0]
     },
     [PheonixActionsList.READ]: {
         pre: null,
-        dialog: ['sprites/pheonix/read/read_talking2/', 19], //Frame splitter not working
+        dialog: ['sprites/pheonix/read/read_talking2/', 19],
         post: ['sprites/pheonix/read/read_stand2/', 20]
     },
     [PheonixActionsList.SILLY]: {

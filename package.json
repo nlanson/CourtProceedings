@@ -11,6 +11,7 @@
   "dependencies": {
     "@types/gifencoder": "^2.0.1",
     "canvas": "^2.8.0",
+    "gif-extract-frames": "^1.0.2",
     "gif-frames": "^1.0.1",
     "gifencoder": "^2.0.1"
   }
