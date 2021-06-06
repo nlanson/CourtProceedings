@@ -4,8 +4,8 @@ const gifFrames = require('gif-frames');
 
 //Use this function to convert sprite gif to png frames.
 const convert = async () => {
-    const gifdir: string  = `assets/sprites/pheonix/sip/sip_talking.gif`;
-    const savedir: string = `assets/sprites/pheonix/sip/sip_talking/`
+    const gifdir: string  = `assets/sprites/judge/stand/stand_talking.gif`;
+    const savedir: string = `assets/sprites/judge/stand/stand_talking/`
     fs.mkdirSync(savedir);
     
     gifFrames({ url: gifdir, frames: 'all', outputType: 'png', cumulative: false })

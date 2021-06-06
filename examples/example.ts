@@ -1,12 +1,16 @@
-import { CourtScene, PheonixActionsList } from '../src/Main';
+import { 
+    CourtScene,
+    PheonixActions,
+    JudgeActions
+} from '../src/Main';
 
 
 const a = async (): Promise<void> => {
     var b = new CourtScene({
-        character: 'pheonix',
-        background: 'defence',
-        dialog: "This coffee is delicious!",
-        action: PheonixActionsList.SIP
+        character: 'judge',
+        background: 'judge',
+        dialog: "lmao this worked on the first try.",
+        action: JudgeActions.SURPRISED
     });
 
     await b.litigate('test');

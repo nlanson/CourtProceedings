@@ -1,14 +1,20 @@
 //Internal
 import { SimpleScrollingText } from './Renderers/SimpleScrollingText';
 import { LoadImage } from './Renderers/Renderer';
-import { PheonixActionsList, PheonixActionsDictionary, ActionTracker } from './Actions';
+import { 
+    PheonixActions,
+    PheonixActionsDictionary,
+    ActionTracker,
+    JudgeActions, 
+    JudgeActionsDictionary
+} from './Actions';
 
 
 //External
 import { loadImage } from 'canvas';
 import * as fs from 'fs/promises';
 
-export type Character = 'pheonix' | 'edgeworth';
+export type Character = 'pheonix' | 'judge' | 'edgeworth' ;
 export type Background = 'defence' | 'judge' | 'prosecution';
 
 
@@ -16,7 +22,7 @@ export type CourtSceneData = {
     character: Character,
     background: Background,
     dialog: string,
-    action: PheonixActionsList 
+    action: PheonixActions | JudgeActions 
 }
 
 
@@ -26,22 +32,38 @@ export type CourtSceneData = {
 export class CourtScene extends SimpleScrollingText implements LoadImage {
     
     private action: ActionTracker;
+    private canLitigate: boolean  = false;
     
     constructor(
         private scene: CourtSceneData
     ) {
         super(960, 640);
 
-        //Validate action here. Make sure selected character has selection action available.
-        this.action = PheonixActionsDictionary[this.scene.action];
+        //If new characters are added, make sure to set here are well.
+        switch(true) {
+            case (this.scene.action <= 13):
+                this.action = PheonixActionsDictionary[this.scene.action as PheonixActions];
+                this.canLitigate = true;
+                break;
+            case (this.scene.action >= 14):
+                this.action = JudgeActionsDictionary[this.scene.action as JudgeActions];
+                this.canLitigate = true;
+                break;
+            default:
+                console.log('Invalid action.');
+                this.action = {pre:null,dialog:['',0],post:null}; //placeholder.
+                this.canLitigate = false;
+        }
     }
 
     public async litigate(save: string): Promise<void> {
-        await this.setup(save);
-        await this.preDialogueAnimation();
-        await this.addScrollingText(this.scene.dialog, 10, 520);
-        await this.postDialogueAnimation();
-        this.finishEncoding();
+        if(this.canLitigate) { //Only proceed if possible.
+            await this.setup(save);
+            await this.preDialogueAnimation();
+            await this.addScrollingText(this.scene.dialog, 10, 520);
+            await this.postDialogueAnimation();
+            this.finishEncoding();
+        }
     }
 
     private async setup(save: string) {
@@ -87,7 +109,7 @@ export class CourtScene extends SimpleScrollingText implements LoadImage {
                 this.setFrame();
             }
         } else {
-            console.log('no pre-dialog frames to render.')
+            console.log('No pre-dialog frames to render.')
             return
         }
     }
@@ -144,7 +166,7 @@ export class CourtScene extends SimpleScrollingText implements LoadImage {
                     this.setFrame();
                 }
         } else {
-            console.log('no post-dialog frames to render.');
+            console.log('No post-dialog frames to render.');
             return
         }
     }
