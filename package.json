@@ -2,9 +2,10 @@
   "name": "scrollingtext",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/Main.js",
+  "main": "dist/src/Main.js",
   "scripts": {
-    "test": "tsc && node dist/src/Main"
+    "example": "tsc && node dist/examples/example",
+    "convert": "tsc && node dist/src/utils/convert"
   },
   "author": "",
   "license": "ISC",

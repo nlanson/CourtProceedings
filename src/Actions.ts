@@ -35,18 +35,18 @@ export const PheonixActionsDictionary:Record<PheonixActionsList, ActionTracker> 
     },
     [PheonixActionsList.CONFIDENT]: {
         pre: null,
-        dialog: ['sprites/pheonix/confident/confident_talking/', 20],
+        dialog: ['sprites/pheonix/confident/confident_talking/', 1],
         post: ['sprites/pheonix/confident/confident_stand/', 0]
     },
     [PheonixActionsList.CORNERED]: {
         pre: null,
-        dialog: ['sprites/pheonix/cornered/cornered_talking2/', 19],
-        post: ['sprites/pheonix/cornered/cornered_stand2/', 19]
+        dialog: ['sprites/pheonix/cornered/cornered_talking2/', 7],
+        post: ['sprites/pheonix/cornered/cornered_stand2/', 3]
     },
     [PheonixActionsList.DAMAGE]: {
         pre: ['sprites/pheonix/damage/damage2/', 13],
-        dialog: ['sprites/pheonix/cornered/cornered_talking2/', 19],
-        post: ['sprites/pheonix/cornered/cornered_stand2/', 19]
+        dialog: ['sprites/pheonix/cornered/cornered_talking2/', 7],
+        post: ['sprites/pheonix/cornered/cornered_stand2/', 3]
     },
     [PheonixActionsList.BREAKDOWN]: {
         pre: null,
@@ -65,28 +65,28 @@ export const PheonixActionsDictionary:Record<PheonixActionsList, ActionTracker> 
     },
     [PheonixActionsList.POINT]: {
         pre: ['sprites/pheonix/point/point_motion2/', 3],
-        dialog: ['sprites/pheonix/point/point_talking/', 17],
+        dialog: ['sprites/pheonix/point/point_talking/', 3],
         post: ['sprites/pheonix/point/point_stand/', 0]
     },
     [PheonixActionsList.READ]: {
         pre: null,
-        dialog: ['sprites/pheonix/read/read_talking2/', 19],
-        post: ['sprites/pheonix/read/read_stand2/', 20]
+        dialog: ['sprites/pheonix/read/read_talking2/', 3],
+        post: ['sprites/pheonix/read/read_stand2/', 13]
     },
     [PheonixActionsList.SILLY]: {
         pre: null,
-        dialog: ['sprites/pheonix/silly/silly_talking/', 20],
+        dialog: ['sprites/pheonix/silly/silly_talking/', 3],
         post: ['sprites/pheonix/silly/silly_stand/', 0]
     },
-    [PheonixActionsList.SIP]: { //NOT YET CONVERTED
-        pre: ['sip_motion', 0],
-        dialog: ['sip_talking', 0],
-        post: ['sip_stand', 0]
+    [PheonixActionsList.SIP]: {
+        pre: ['sprites/pheonix/sip/sip_motion/', 7],
+        dialog: ['sprites/pheonix/sip/sip_talking/', 1],
+        post: ['sprites/pheonix/sip/sip_stand/', 0]
     },
     [PheonixActionsList.SLAM]: {
         pre: null,
         dialog: ['sprites/pheonix/slam/slam_talking/', 21],
-        post: ['sprites/pheonix/slam/slam_stand/', 8]
+        post: ['sprites/pheonix/slam/slam_stand/', 6]
     },
     [PheonixActionsList.THINKING]: {
         pre: null,
