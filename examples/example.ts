@@ -7,10 +7,11 @@ import {
 
 const a = async (): Promise<void> => {
     var b = new CourtScene({
-        character: 'judge',
-        background: 'judge',
-        dialog: "lmao this worked on the first try.",
-        action: JudgeActions.SURPRISED
+        character: 'pheonix',
+        displayName: 'nlanson',
+        background: 'defence',
+        dialog: "This coffee is delicious!",
+        action: PheonixActions.SIP
     });
 
     await b.litigate('test');

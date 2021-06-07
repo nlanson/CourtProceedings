@@ -20,6 +20,7 @@ export type Background = 'defence' | 'judge' | 'prosecution';
 
 export type CourtSceneData = {
     character: Character,
+    displayName: string
     background: Background,
     dialog: string,
     action: PheonixActions | JudgeActions 
@@ -31,7 +32,7 @@ export type CourtSceneData = {
 //NOT FINAL
 export class CourtScene extends SimpleScrollingText implements LoadImage {
     
-    private action: ActionTracker;
+    private action: ActionTracker = {pre:null,dialog:['',0],post:null}; //placeholder.
     private canLitigate: boolean  = false;
     
     constructor(
@@ -39,7 +40,22 @@ export class CourtScene extends SimpleScrollingText implements LoadImage {
     ) {
         super(960, 640);
 
-        //If new characters are added, make sure to set here are well.
+        this.setAction();
+        
+    }
+
+    public async litigate(save: string): Promise<void> {
+        if(this.canLitigate) { //Only proceed if possible.
+            await this.setup(save);
+            await this.preDialogueAnimation();
+            await this.addScrollingText(this.scene.dialog, 10, 520);
+            await this.postDialogueAnimation();
+            this.finishEncoding();
+        }
+    }
+
+    private setAction() {
+        //Add more options here if new chars are added
         switch(true) {
             case (this.scene.action <= 13):
                 this.action = PheonixActionsDictionary[this.scene.action as PheonixActions];
@@ -56,21 +72,9 @@ export class CourtScene extends SimpleScrollingText implements LoadImage {
         }
     }
 
-    public async litigate(save: string): Promise<void> {
-        if(this.canLitigate) { //Only proceed if possible.
-            await this.setup(save);
-            await this.preDialogueAnimation();
-            await this.addScrollingText(this.scene.dialog, 10, 520);
-            await this.postDialogueAnimation();
-            this.finishEncoding();
-        }
-    }
-
     private async setup(save: string) {
         this.encoderOptions(50);
-        this.setWriteStyle('#fff', '24px Arial', 'center');
         this.startEncoder(save);
-        await this.loadBackground();
     }
 
     private async loadBackground() {
@@ -93,6 +97,9 @@ export class CourtScene extends SimpleScrollingText implements LoadImage {
 
     private async loadTextBox() {
         await this.loadImage('text-box2.png', 0, 440);
+        this.setWriteStyle('#fff', '36px Arial', 'center'); //Set font for this section.
+        this.writeText(this.scene.displayName, (this.measureText(this.scene.displayName)/2)+20, 480);
+        this.setWriteStyle('#fff', '24px Arial', 'center'); //Return to original font.
     }
 
     private async preDialogueAnimation() {
@@ -109,7 +116,7 @@ export class CourtScene extends SimpleScrollingText implements LoadImage {
                 this.setFrame();
             }
         } else {
-            console.log('No pre-dialog frames to render.')
+            console.log('No pre-dialog frames to render.');
             return
         }
     }
@@ -117,7 +124,6 @@ export class CourtScene extends SimpleScrollingText implements LoadImage {
     async addScrollingText(text: string, xCoord: number, yCoord:number) {
         this.encoderOptions(50);
         
-        var prevWidth: number = 0; //Variable to track total width of text. Used for frame setting.
         var frameCount: number = 0;
 
         for ( let i=0; i<=text.length; i++ ) {
@@ -155,6 +161,7 @@ export class CourtScene extends SimpleScrollingText implements LoadImage {
 
     private async postDialogueAnimation() {
         this.encoderOptions(100); //Set slower time delay for post dialog animation.
+        this.setWriteStyle('#fff', '24px Arial', 'center'); //Set font for this section.
         
         if ( this.action.post != null ) {
                 for ( let i=0; i<=this.action.post[1]; i++ ) {

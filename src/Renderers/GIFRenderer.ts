@@ -2,6 +2,11 @@ import { Renderer } from './Renderer';
 import * as fs from 'fs';
 import GIFEncoder from 'gifencoder';
 
+type frameTracker = {
+    currentFrame: number,
+    totalFrames: number
+}
+
 export abstract class GIFRenderer extends Renderer {
     
     protected encoder: GIFEncoder;
@@ -47,4 +52,5 @@ export abstract class GIFRenderer extends Renderer {
     public setFrame() {
         this.encoder.addFrame(this.ctx);
     }
+
 }
