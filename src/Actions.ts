@@ -28,12 +28,26 @@ export enum PheonixActions {
 }
 
 export enum JudgeActions {
-    EYESCLOSED = 14,
+    EYES_CLOSED = 14,
     HEADSHAKE,
     NEGATIVE,
     POSITIVE,
     STAND,
     SURPRISED
+}
+
+export enum EdgeworthActions {
+    ARMS_CROSSED = 20,
+    BOW,
+    CONFIDENT_SHRUG,
+    CONFIDENT_SMIRK,
+    CORNERED,
+    DAMAGE,
+    DESK_SLAM,
+    POINT,
+    READ,
+    SMIRK,
+    STAND
 }
 
 
@@ -109,7 +123,7 @@ export const PheonixActionsDictionary:Record<PheonixActions, ActionTracker> = {
 }
 
 export const JudgeActionsDictionary: Record<JudgeActions, ActionTracker> = {
-    [JudgeActions.EYESCLOSED]: {
+    [JudgeActions.EYES_CLOSED]: {
         pre: null,
         dialog: ['sprites/judge/eyesclosed/eyesclosed/', 0],
         post: null
@@ -139,4 +153,13 @@ export const JudgeActionsDictionary: Record<JudgeActions, ActionTracker> = {
         dialog: ['sprites/judge/surprised/surprised_talking', 17],
         post: ['sprites/judge/surprised/surprised_stand', 16]
     },
+}
+
+//Edgeworth actions dictionary (incomplete)
+export const EdgeworthActionsDictionary: Record<EdgeworthActions, ActionTracker> = {
+    [EdgeworthActions.ARMS_CROSSED]: {
+        pre: null,
+        dialog: ['',0],
+        post: null
+    }
 }
