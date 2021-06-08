@@ -168,6 +168,7 @@ export class CourtScene extends SimpleScrollingText implements LoadImage {
                     await this.loadBackground();
                     await this.loadImage(`${this.action.post[0]}/${i}.png`, 0, 0);
                     await this.loadTextBox();
+
                     this.writeText(this.scene.dialog, 10+(this.measureText(this.scene.dialog)/2), 520);
                     
                     this.setFrame();
