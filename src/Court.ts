@@ -57,7 +57,7 @@ export class CourtScene extends SimpleScrollingText implements LoadImage {
     private setAction() {
         //Add more options here if new chars are added
         switch(true) {
-            case (this.scene.action <= 13):
+            case (this.scene.action > 0 && this.scene.action <= 13):
                 this.action = PheonixActionsDictionary[this.scene.action as PheonixActions];
                 this.canLitigate = true;
                 break;
