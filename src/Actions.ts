@@ -164,46 +164,47 @@ export const EdgeworthActionsDictionary: Record<EdgeworthActions, ActionTracker>
     },
     /*
     *   Not converted below here.
+    *   Filled in areas are convertions that DID work.
     */
     [EdgeworthActions.BOW]: {
-        pre: ['sprites/edgeworth/bow/bow/', 2],
+        pre: ['', 2],
         dialog: ['sprites/edgeworth/bow/bow_idle/', 0],
         post: null
     },
     [EdgeworthActions.CONFIDENT_SHRUG]: {
-        pre: ['sprites/edgeworth/confident_shrug/confident_shrug_motion/', 8],
-        dialog: ['sprites/edgeworth/confident_shrug/confident_talking/', 1],
+        pre: ['', 8],
+        dialog: ['', 1],
         post: ['sprites/edgeworth/confident_shrug/confident_idle/', 0]
     },
     [EdgeworthActions.CONFIDENT_SMIRK]: {
-        pre: ['sprites/edgeworth/confident_smirk/confident_smirk_motion', 10],
-        dialog: ['sprites/edgeworth/confident_shrug/confident_talking/', 1],
+        pre: ['', 10],
+        dialog: ['', 1],
         post: ['sprites/edgeworth/confident_shrug/confident_idle/', 0]
     },
     [EdgeworthActions.CORNERED]: {
         pre: null,
-        dialog: ['sprites/edgeworth/cornered/cornered_talking/', 3],
+        dialog: ['', 3],
         post: ['sprites/edgeworth/cornered/cornered_idle/', 0]
     },
     [EdgeworthActions.DAMAGE]: {
         pre: null,
-        dialog: ['sprites/edgeworth/damage/damage', 1],
-        post: null
+        dialog: ['', 1],
+        post: ['sprites/edgeworth/cornered/cornered_idle/', 0]
     },
     [EdgeworthActions.DESK_SLAM]: {
         pre: null,
         dialog: ['',0],
-        post: null
+        post: ['sprites/edgeworth/desk_slam/desk_slam_idle/',0]
     },
     [EdgeworthActions.POINT]: {
         pre: null,
-        dialog: ['',0],
-        post: null
+        dialog: ['sprites/edgeworth/point/point_talking/', 17],
+        post: ['sprites/edgeworth/point/point_idle/', 0]
     },
     [EdgeworthActions.READ]: {
         pre: null,
         dialog: ['',0],
-        post: null
+        post: ['sprites/edgeworth/read/read_idle/', 0]
     },
     [EdgeworthActions.SMIRK]: {
         pre: null,
@@ -213,7 +214,6 @@ export const EdgeworthActionsDictionary: Record<EdgeworthActions, ActionTracker>
     [EdgeworthActions.STAND]: {
         pre: null,
         dialog: ['',0],
-        post: null
-    },
-
+        post: ['sprites/edgeworth/stand/stand_idle/', 0]
+    }
 }
