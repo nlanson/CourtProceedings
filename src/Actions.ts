@@ -150,8 +150,8 @@ export const JudgeActionsDictionary: Record<JudgeActions, ActionTracker> = {
     },
     [JudgeActions.SURPRISED]: {
         pre: null,
-        dialog: ['sprites/judge/surprised/surprised_talking', 17],
-        post: ['sprites/judge/surprised/surprised_stand', 16]
+        dialog: ['sprites/judge/surprised/surprised_talking/', 17],
+        post: ['sprites/judge/surprised/surprised_stand/', 16]
     },
 }
 
@@ -159,32 +159,35 @@ export const JudgeActionsDictionary: Record<JudgeActions, ActionTracker> = {
 export const EdgeworthActionsDictionary: Record<EdgeworthActions, ActionTracker> = {
     [EdgeworthActions.ARMS_CROSSED]: {
         pre: null,
-        dialog: ['',0],
-        post: null
+        dialog: ['sprites/edgeworth/arms_crossed/arms_crossed_talking2/', 37],
+        post: ['sprites/edgeworth/arms_crossed/arms_crossed_idle/', 17]
     },
+    /*
+    *   Not converted below here.
+    */
     [EdgeworthActions.BOW]: {
-        pre: null,
-        dialog: ['',0],
+        pre: ['sprites/edgeworth/bow/bow/', 2],
+        dialog: ['sprites/edgeworth/bow/bow_idle/', 0],
         post: null
     },
     [EdgeworthActions.CONFIDENT_SHRUG]: {
-        pre: null,
-        dialog: ['',0],
-        post: null
+        pre: ['sprites/edgeworth/confident_shrug/confident_shrug_motion/', 8],
+        dialog: ['sprites/edgeworth/confident_shrug/confident_talking/', 1],
+        post: ['sprites/edgeworth/confident_shrug/confident_idle/', 0]
     },
     [EdgeworthActions.CONFIDENT_SMIRK]: {
-        pre: null,
-        dialog: ['',0],
-        post: null
+        pre: ['sprites/edgeworth/confident_smirk/confident_smirk_motion', 10],
+        dialog: ['sprites/edgeworth/confident_shrug/confident_talking/', 1],
+        post: ['sprites/edgeworth/confident_shrug/confident_idle/', 0]
     },
     [EdgeworthActions.CORNERED]: {
         pre: null,
-        dialog: ['',0],
-        post: null
+        dialog: ['sprites/edgeworth/cornered/cornered_talking/', 3],
+        post: ['sprites/edgeworth/cornered/cornered_idle/', 0]
     },
     [EdgeworthActions.DAMAGE]: {
         pre: null,
-        dialog: ['',0],
+        dialog: ['sprites/edgeworth/damage/damage', 1],
         post: null
     },
     [EdgeworthActions.DESK_SLAM]: {

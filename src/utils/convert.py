@@ -2,6 +2,7 @@ from PIL import Image
 import os
 
 # Takes in a gif file and a directory to output the frames from the gif.
+# Some transparent gifs wont work.
 class GifFrameExtractor:
     def __init__(self, file, outdir):
         self.file = file
@@ -20,7 +21,8 @@ class GifFrameExtractor:
     def extractFrames(self):
         for i in range(self.frames):
             self.image.seek(i)
-            self.image.save(self.outdir + str(i) + ".png")
+            self.image.load()
+            self.image.save(self.outdir + str(i) + ".png", disposal=2, transparancy=0)
 
 
 
@@ -28,11 +30,11 @@ class GifFrameExtractor:
 # finds gifs and automatically creates new folder and extracts frames.
 # For the time being, it is done manually with an array
 
-basedir = 'assets/sprites/<CharacterToProcess>/'
+basedir = 'assets/sprites/edgeworth/'
 unconvertedGifs = [
     {
-        'file': basedir + '',
-        'outdir': basedir + ''
+        'file': basedir + 'bow/bow.gif',
+        'outdir': basedir + 'bow/bow3/'
     }
 ]
 
