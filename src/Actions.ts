@@ -161,5 +161,56 @@ export const EdgeworthActionsDictionary: Record<EdgeworthActions, ActionTracker>
         pre: null,
         dialog: ['',0],
         post: null
-    }
+    },
+    [EdgeworthActions.BOW]: {
+        pre: null,
+        dialog: ['',0],
+        post: null
+    },
+    [EdgeworthActions.CONFIDENT_SHRUG]: {
+        pre: null,
+        dialog: ['',0],
+        post: null
+    },
+    [EdgeworthActions.CONFIDENT_SMIRK]: {
+        pre: null,
+        dialog: ['',0],
+        post: null
+    },
+    [EdgeworthActions.CORNERED]: {
+        pre: null,
+        dialog: ['',0],
+        post: null
+    },
+    [EdgeworthActions.DAMAGE]: {
+        pre: null,
+        dialog: ['',0],
+        post: null
+    },
+    [EdgeworthActions.DESK_SLAM]: {
+        pre: null,
+        dialog: ['',0],
+        post: null
+    },
+    [EdgeworthActions.POINT]: {
+        pre: null,
+        dialog: ['',0],
+        post: null
+    },
+    [EdgeworthActions.READ]: {
+        pre: null,
+        dialog: ['',0],
+        post: null
+    },
+    [EdgeworthActions.SMIRK]: {
+        pre: null,
+        dialog: ['',0],
+        post: null
+    },
+    [EdgeworthActions.STAND]: {
+        pre: null,
+        dialog: ['',0],
+        post: null
+    },
+
 }

@@ -5,14 +5,13 @@
   "main": "dist/src/Main.js",
   "scripts": {
     "example": "tsc && node dist/examples/example",
-    "convert": "tsc && node dist/src/utils/convert"
+    "convert": "py src/utils/convert.py"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@types/gifencoder": "^2.0.1",
     "canvas": "^2.8.0",
-    "gif-frames": "^1.0.1",
     "gifencoder": "^2.0.1"
   }
 }
