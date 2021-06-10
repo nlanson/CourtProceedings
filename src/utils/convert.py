@@ -21,24 +21,21 @@ class GifFrameExtractor:
     def extractFrames(self):
         for i in range(self.frames):
             self.image.seek(i)
-            self.image.save(self.outdir + str(i) + ".png", transparency=246)
+            self.image.save(self.outdir + str(i) + ".png")
 
 
 
-# Should build a pipe line that sets the character and iterates over each action dir and 
-# finds gifs and automatically creates new folder and extracts frames.
-# For the time being, it is done manually with an array
+# Batch process all the gifs in a char folder
+rootdir = 'assets/sprites/edgeworth/'
+for subdir, dirs, files in os.walk(rootdir):
+    for file in files:
+        if file.endswith('.gif'):
+            outdir = os.path.join(subdir, file[0:len(file)-4]) + '/'
+            file = os.path.join(subdir, file)
+            e = GifFrameExtractor(file, outdir)
+            e.extractFrames()
 
-basedir = 'assets/'
-unconvertedGifs = [
-    {
-        'file': basedir + 'bow.gif',
-        'outdir': basedir + 'bow/'
-    }
-]
 
-for i in unconvertedGifs:
-    extractor = GifFrameExtractor(i['file'], i['outdir'])
-    extractor.extractFrames()
+
 
 
