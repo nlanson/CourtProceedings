@@ -21,8 +21,7 @@ class GifFrameExtractor:
     def extractFrames(self):
         for i in range(self.frames):
             self.image.seek(i)
-            self.image.load()
-            self.image.save(self.outdir + str(i) + ".png", disposal=2, transparancy=0)
+            self.image.save(self.outdir + str(i) + ".png", transparency=246)
 
 
 
@@ -30,11 +29,11 @@ class GifFrameExtractor:
 # finds gifs and automatically creates new folder and extracts frames.
 # For the time being, it is done manually with an array
 
-basedir = 'assets/sprites/edgeworth/'
+basedir = 'assets/'
 unconvertedGifs = [
     {
-        'file': basedir + 'bow/bow.gif',
-        'outdir': basedir + 'bow/bow3/'
+        'file': basedir + 'bow.gif',
+        'outdir': basedir + 'bow/'
     }
 ]
 
