@@ -21,6 +21,8 @@ class GifFrameExtractor:
     def extractFrames(self):
         for i in range(self.frames):
             self.image.seek(i)
+            rgba = self.image.convert('RGBA')
+            print("Frame: " + str(i) + " of " + self.file + " has colour index " + str(rgba.getpixel((0,0))))
             self.image.save(self.outdir + str(i) + ".png")
 
 
