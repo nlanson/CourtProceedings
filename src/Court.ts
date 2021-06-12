@@ -199,6 +199,8 @@ export class CourtScene extends SimpleScrollingText implements LoadImage {
     
 }
 
+//This class is full retarded.
+//Might try and find a python alternative.
 export class CourtProceeding extends GIFRenderer implements LoadImage{
 
     constructor(
