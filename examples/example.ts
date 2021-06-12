@@ -1,7 +1,8 @@
 import { 
     CourtScene,
     PheonixActions,
-    JudgeActions
+    JudgeActions,
+    EdgeworthActions
 } from '../src/Main';
 
 
@@ -10,8 +11,8 @@ const a = async (): Promise<void> => {
         character: 'pheonix',
         displayName: 'nlanson',
         background: 'defence',
-        dialog: "This coffee is delicious!",
-        action: PheonixActions.SIP
+        dialog: "This library generates court scenes like this one.",
+        action: PheonixActions.READ
     });
 
     await b.litigate('test');

@@ -6,7 +6,9 @@ import {
     PheonixActionsDictionary,
     ActionTracker,
     JudgeActions, 
-    JudgeActionsDictionary
+    JudgeActionsDictionary,
+    EdgeworthActionsDictionary,
+    EdgeworthActions
 } from './Actions';
 
 
@@ -23,7 +25,7 @@ export type CourtSceneData = {
     displayName: string
     background: Background,
     dialog: string,
-    action: PheonixActions | JudgeActions 
+    action: PheonixActions | JudgeActions | EdgeworthActions
 }
 
 
@@ -51,18 +53,26 @@ export class CourtScene extends SimpleScrollingText implements LoadImage {
             await this.addScrollingText(this.scene.dialog, 10, 520);
             await this.postDialogueAnimation();
             this.finishEncoding();
+        } else {
+            console.log('Cannot litigate case.')
+            console.log(this.scene.action)
         }
     }
 
     private setAction() {
         //Add more options here if new chars are added
         switch(true) {
-            case (this.scene.action > 0 && this.scene.action <= 13):
+            case (this.scene.action > 0 && this.scene.action < 14):
+     
                 this.action = PheonixActionsDictionary[this.scene.action as PheonixActions];
                 this.canLitigate = true;
                 break;
-            case (this.scene.action >= 14):
+            case (this.scene.action >= 14 && this.scene.action < 20):
                 this.action = JudgeActionsDictionary[this.scene.action as JudgeActions];
+                this.canLitigate = true;
+                break;
+            case (this.scene.action >= 20 && this.scene.action < 31 ):   
+                this.action = EdgeworthActionsDictionary[this.scene.action as EdgeworthActions];
                 this.canLitigate = true;
                 break;
             default:

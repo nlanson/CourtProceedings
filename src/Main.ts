@@ -1,3 +1,3 @@
 //Module Exports
 export { CourtScene, CourtSceneData } from './Court';
-export { PheonixActions, JudgeActions } from './Actions';
+export { PheonixActions, JudgeActions, EdgeworthActions } from './Actions';
