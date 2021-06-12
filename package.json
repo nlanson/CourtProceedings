@@ -10,8 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/gifencoder": "^2.0.1",
     "canvas": "^2.8.0",
+    "gif-frames": "^1.0.1",
     "gifencoder": "^2.0.1"
+  },
+  "devDependencies": {
+    "@types/gifencoder": "^2.0.1"
   }
 }

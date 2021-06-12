@@ -1,5 +1,6 @@
 //Internal
 import { SimpleScrollingText } from './Renderers/SimpleScrollingText';
+import { GIFRenderer } from './Renderers/GIFRenderer';
 import { LoadImage } from './Renderers/Renderer';
 import { 
     PheonixActions,
@@ -14,7 +15,8 @@ import {
 
 //External
 import { loadImage } from 'canvas';
-import * as fs from 'fs/promises';
+import * as fs from 'fs';
+const gifFrames = require('gif-frames');
 
 export type Character = 'pheonix' | 'judge' | 'edgeworth' ;
 export type Background = 'defence' | 'judge' | 'prosecution';
@@ -195,4 +197,57 @@ export class CourtScene extends SimpleScrollingText implements LoadImage {
     }
         
     
+}
+
+export class CourtProceeding extends GIFRenderer implements LoadImage{
+
+    constructor(
+        private scenes: Array<CourtSceneData>
+    ) { 
+        super(960, 640)
+    }
+
+    async renderScenes() {
+        for ( let i=0; i<this.scenes.length; i++ ) {
+            let scene: CourtScene = new CourtScene(this.scenes[i]);
+            await scene.litigate(i.toString());
+        }
+    }
+
+    //Use canvas to chain gifs. (Slow but only viable option atm unless installing third party software such as ffmpeg).
+    //(UNFINISHED)
+    async chainGifs() {
+        
+        //retarded but save each frame into a temp dir
+        for( let i=0; i<this.scenes.length; i++ ) {
+            gifFrames({ url: 'out/0.gif', frames: 'all', outputType: 'png' })
+            .then((frameData: any) => {
+                
+                for ( let j=0; j<=frameData.length; j++ ) {
+                    
+                    //Create temp folder to accomadate frames.
+                    //Create sub temp folder to seperate gifs.
+
+                    frameData[j].getImage().pipe(
+                        fs.createWriteStream(`out/${j}.png`)
+                    )
+                }
+
+            }).catch(console.log('write err'));
+        }
+        
+        this.encoderOptions(50);
+        this.startEncoder('merged');
+
+        //traverse through created temp dir and subdir, load frame image, and create gif.
+        // this.loadImage(___, 0, 0)
+        // this.setFrame()
+
+        this.finishEncoding();
+    }
+
+    async loadImage(image: string, x: number, y: number): Promise<void> {
+        let img: any = await loadImage(`assets/${image}`);
+        this.ctx.drawImage(img, x, y);
+    }
 }
