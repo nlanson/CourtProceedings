@@ -1,5 +1,5 @@
-# Court Proceedings generator.
-Generate court proceeding gifs with NodeJS.
+# Court Scene generator.
+Generate court scene gifs with NodeJS.
 
 Example:
 ![Court Proceeding Example](./out/test.gif)
